@@ -1,24 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { TypeFilter } from "./components/TypeFilter";
+import { ModelFilter } from "./components/ModelFilter";
+import "./App.css";
 
 function App() {
+  const [type, setType] = useState<string>("");
+  const [imgType, setImgType] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {
+    fetch(`https://swapi.dev/api/${type}`)
+      .then((res) => res.json())
+      .then((res) => setData(res.results))
+      .catch((error) => console.log("is error", error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type]);
+
+  useEffect(() => {
+    if (type === "people") {
+      setImgType("characters");
+    } else {
+      setImgType(type);
+    }
+  }, [type]);
+
+  const typeSetHandler = (make: string) => {
+    setType(make);
+  };
+
+  const nameSetHandler = (name: string) => {
+    setName(name);
+  };
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TypeFilter typeSetHandler={typeSetHandler} />
+      {data ? (
+        <ModelFilter names={data} nameSetHandler={nameSetHandler} />
+      ) : null}
+      <div>
+        {name ? (
+          <img
+            src={`https://starwars-visualguide.com/assets/img/${imgType}/${name}.jpg`}
+            alt="Opppsss, nothing here"
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
