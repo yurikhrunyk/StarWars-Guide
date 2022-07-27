@@ -4,7 +4,9 @@ import { ModelFilter } from "../ModelFilter";
 
 const defaultProps: any = {
   names: [{ name: "Luke Skywalker" }, { name: "C-3P0" }],
-  nameSetHandler: () => {},
+  imgNumberSetHandler: () => {},
+  isError: false,
+  isLoading: false,
 };
 
 test("should render dropdown", () => {
@@ -30,4 +32,19 @@ test("should show selected item", () => {
     name: "Luke Skywalker",
   }) as HTMLOptionElement;
   expect(selectedOption.selected).toBeTruthy();
+});
+
+test("should return null when prop names is undefined", () => {
+  const loacalProps = {
+    ...defaultProps,
+    names: undefined,
+  };
+
+  render(<ModelFilter {...loacalProps} />);
+
+  const selectName = screen.queryByRole("option", {
+    name: "Luke Skywalker",
+  });
+  expect(selectName).not.toBeInTheDocument();
+
 });
