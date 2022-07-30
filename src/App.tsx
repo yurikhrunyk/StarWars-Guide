@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TypeFilter } from "./components/TypeFilter";
 import { ModelFilter } from "./components/ModelFilter";
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   const [type, setType] = useState<string>("");
@@ -10,13 +10,6 @@ function App() {
   const [data, setData] = useState<{ name: string }[]>();
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const styles = {
-    container: {
-      border: "3px solid aqua",
-      borderRadius: "10px"
-    },
-  } as const;
 
   useEffect(() => {
     fetch(`https://swapi.dev/api/${type}`)
@@ -51,7 +44,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={styles.app}>
       <TypeFilter typeSetHandler={typeSetHandler} />
       <ModelFilter
         names={data}
@@ -64,7 +57,7 @@ function App() {
           <img
             src={`https://starwars-visualguide.com/assets/img/${imgType}/${imgNumber}.jpg`}
             alt="Opppsss, nothing here"
-            style={styles.container}
+            className={styles.appImage}
           />
         ) : null}
       </div>

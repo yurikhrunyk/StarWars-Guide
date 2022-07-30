@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles/TypeFilter.module.css";
 
 type TypeProps = {
   typeSetHandler: (make: string) => void;
@@ -9,7 +10,7 @@ export const TypeFilter: React.FC<TypeProps> = ({ typeSetHandler }) => {
     <div>
       <select
         onChange={(e) => typeSetHandler(e.target.value)}
-        style={{ marginTop: "20px", width: "300px", textAlign: "center" }}
+        className={styles.typeList}
       >
         <option defaultValue="">Select type</option>
         <option value="people">People</option>

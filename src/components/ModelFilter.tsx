@@ -1,6 +1,7 @@
 import React from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { Spinner } from "react-bootstrap";
+import styles from "../styles/ModelFilter.module.css";
 
 interface ModelProps {
   names: { name: string }[] | undefined;
@@ -21,21 +22,21 @@ export const ModelFilter: React.FC<ModelProps> = ({
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     );
-  };
+  }
 
   if (isError) {
     return <ErrorMessage />;
-  };
+  }
 
   if (names === undefined) {
     return null;
-  };
+  }
 
   return (
     <select
       onChange={(e) => imgNumberSetHandler(e.target.value)}
       data-testid="name-list"
-      style={{margin: '20px', width: '300px', textAlign: "center"}}
+      className={styles.nameList}
     >
       <option defaultValue="">Select name</option>
       {names.map((name: { name: string }, index: number) => (
