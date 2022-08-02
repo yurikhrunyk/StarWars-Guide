@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "../styles/TypeFilter.module.css";
+import React from 'react'
+import styles from '../styles/TypeFilter.module.css'
 
 type TypeProps = {
-  typeSetHandler: (make: string) => void;
-};
+  typeSetHandler: (make: string) => void
+}
 
 export const TypeFilter: React.FC<TypeProps> = ({ typeSetHandler }) => {
   return (
@@ -18,5 +18,5 @@ export const TypeFilter: React.FC<TypeProps> = ({ typeSetHandler }) => {
         <option value="starships">Starships</option>
       </select>
     </div>
-  );
-};
+  )
+}

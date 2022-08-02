@@ -1,13 +1,13 @@
-import React from "react";
-import { ErrorMessage } from "./ErrorMessage";
-import { Spinner } from "react-bootstrap";
-import styles from "../styles/ModelFilter.module.css";
+import React from 'react'
+import { ErrorMessage } from './ErrorMessage'
+import { Spinner } from 'react-bootstrap'
+import styles from '../styles/ModelFilter.module.css'
 
 interface ModelProps {
-  names: { name: string }[] | undefined;
-  imgNumberSetHandler: (imgNumber: string) => void;
-  isError: boolean;
-  isLoading: boolean;
+  names: { name: string }[] | undefined
+  imgNumberSetHandler: (imgNumber: string) => void
+  isError: boolean
+  isLoading: boolean
 }
 
 export const ModelFilter: React.FC<ModelProps> = ({
@@ -21,15 +21,15 @@ export const ModelFilter: React.FC<ModelProps> = ({
       <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
-    );
+    )
   }
 
   if (isError) {
-    return <ErrorMessage />;
+    return <ErrorMessage />
   }
 
   if (names === undefined) {
-    return null;
+    return null
   }
 
   return (
@@ -45,5 +45,5 @@ export const ModelFilter: React.FC<ModelProps> = ({
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
