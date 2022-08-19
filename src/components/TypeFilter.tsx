@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../styles/TypeFilter.module.css'
 
 type TypeProps = {
-  typeSetHandler: (make: string) => void
+  typeSetHandler: (type: string) => void
 }
 
 export const TypeFilter: React.FC<TypeProps> = ({ typeSetHandler }) => {
@@ -13,7 +13,7 @@ export const TypeFilter: React.FC<TypeProps> = ({ typeSetHandler }) => {
         className={styles.typeList}
       >
         <option defaultValue="">Select type</option>
-        <option value="people">People</option>
+        <option value="characters">People</option>
         <option value="planets">Planets</option>
         <option value="starships">Starships</option>
       </select>
