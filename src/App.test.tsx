@@ -1,8 +1,23 @@
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
 import { rest } from 'msw'
 import { server } from './mocks/server'
+import { MockedProvider } from '@apollo/client/testing'
+
+// const mocks: any = [
+//   {
+//     request: {
+//       query: GET_PEOPLE,
+//     },
+//     result: {
+//       data: {
+//         people: [{ id: 'asd', name: 'luke' }],
+//       },
+//     },
+//   },
+// ]
 
 test('renders select type dropdown', () => {
   render(<App />)
@@ -11,8 +26,12 @@ test('renders select type dropdown', () => {
   expect(select).toBeInTheDocument()
 })
 
-test('renders select name dropdown', async () => {
-  render(<App />)
+test.only('renders select name dropdown', async () => {
+  // render(
+  //   <MockedProvider mocks={mocks}>
+  //     <App />
+  //   </MockedProvider>
+  // )
 
   const selectType = screen.getByRole('combobox')
   userEvent.selectOptions(selectType, 'People')

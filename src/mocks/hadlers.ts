@@ -1,12 +1,17 @@
-import { rest } from 'msw'
+import { graphql } from 'msw'
 
 export const handlers = [
-  rest.get('https://swapi.dev/api/', (req, res, ctx) => {
-    return res(ctx.json({ name: 'Luke Skywalker' }))
-  }),
-  rest.get('https://swapi.dev/api/people', (req, res, ctx) => {
+  graphql.query('People', (req, res, ctx) => {
+    console.log('im here')
     return res(
-      ctx.json({ results: [{ name: 'Luke Skywalker' }, { name: 'C-3P0' }] })
+      ctx.data({
+        people: [
+          {
+            id: '123',
+            name: 'Luke Skywalker',
+          },
+        ],
+      })
     )
   }),
 ]
