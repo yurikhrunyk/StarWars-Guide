@@ -5,12 +5,18 @@ export const handlers = [
     console.log('im here')
     return res(
       ctx.data({
-        people: [
-          {
-            id: '123',
-            name: 'Luke Skywalker',
-          },
-        ],
+        allPeople: {
+          people: [
+            {
+              id: '123',
+              name: 'Luke Skywalker',
+            },
+            {
+              id: '124',
+              name: 'C-3P0',
+            },
+          ],
+        },
       })
     )
   }),

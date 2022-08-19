@@ -2,9 +2,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
-import { rest } from 'msw'
+import { graphql } from 'msw'
 import { server } from './mocks/server'
-import { MockedProvider } from '@apollo/client/testing'
 
 // const mocks: any = [
 //   {
@@ -26,12 +25,8 @@ test('renders select type dropdown', () => {
   expect(select).toBeInTheDocument()
 })
 
-test.only('renders select name dropdown', async () => {
-  // render(
-  //   <MockedProvider mocks={mocks}>
-  //     <App />
-  //   </MockedProvider>
-  // )
+test('renders select name dropdown', async () => {
+  render(<App />)
 
   const selectType = screen.getByRole('combobox')
   userEvent.selectOptions(selectType, 'People')
@@ -70,10 +65,7 @@ test('should render img after selecting name', async () => {
 
 test('should render error message when server return status 500', async () => {
   server.resetHandlers(
-    rest.get('https://swapi.dev/api/', (req, res, ctx) => {
-      return res(ctx.status(500))
-    }),
-    rest.get('https://swapi.dev/api/people', (req, res, ctx) => {
+    graphql.query('People', (req, res, ctx) => {
       return res(ctx.status(500))
     })
   )
